@@ -33,7 +33,7 @@ def index():
         
         # Append the message to the chat dialog main text area
         # chat_log = f"User: {message}\n"
-        chat_log = f"\nUser: {message}\nResponse: {botmsg}\n{botmsg2}"
+        chat_log = f"User: {message}\nResponse: {botmsg}\n{botmsg2}"
         # render the chat log textarea only
         return render_template('chatdata.html', chat_log=chat_log)
 
