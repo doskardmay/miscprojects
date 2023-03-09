@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+<!--
+Not sure how to load this:
+    <link rel="stylesheet" href="style.css">
+-->
+    <title>Chat Dialog</title>
+
+    <style>
+      body {
+	  background-color: lightblue;
+      }
+      textarea {
+	  background-color: lightyellow;
+	  width: 500px;
+	  height: 200px;
+      }
+      </style>
+
+</head>
+  <body>
+    <div>
+      <img src="./static/LabCorpLogoNew.png" alt="Labcorp logo" width="22%" height="6%" />
+      <br>
+      
+      <label for="message">Enter your question or response here and press [Send]:</label>
+      <br>
+      <div>
+        <textarea id="message" name="message" width="200px"></textarea>
+      </div>
+    </div>
+    Chatbot Response:
+    <div>
+        <textarea id="chat-log" name="chat_log" readonly>{{ chat_log }}</textarea>
+    </div>
+    <div>
+        <button type="submit" onclick="send()">Send</button>
+        <button type="button" onclick="quit()">Quit</button>
+    </div>
+    <script>
+        function send() {
+            // Retrieve the message and endpoint URL values
+            var message = document.getElementById('message').value;
+            // var endpoint_url = document.getElementById('endpoint-url').value;
+            var endpoint_url = 'https://kibtrecgt5.execute-api.us-east-1.amazonaws.com';
+
+            // Send a POST request to the specified endpoint URL with the message data
+            fetch('/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'message': message,
+                    'endpoint_url': endpoint_url
+                })
+            })
+	    .then(response => response.text())
+	    .then(data => {
+                // Append the response to the chat log
+                var chat_log = document.getElementById('chat-log');
+                chat_log.value += data;
+                chat_log.scrollTop = chat_log.scrollHeight;
+            })
+            .catch(error => console.error(error));
+        }
+
+        function quit() {
+            // Close the chat dialog window
+            window.close();
+        }
+    </script>
+</body>
+</html>
