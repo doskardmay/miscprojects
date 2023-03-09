@@ -21,6 +21,7 @@ Not sure how to load this:
       </style>
 
 </head>
+  <body onload="InitListeners()">
   <body>
     <div>
       <img src="./static/LabCorpLogoNew.png" alt="Labcorp logo" width="22%" height="6%" />
@@ -37,8 +38,8 @@ Not sure how to load this:
         <textarea id="chat-log" name="chat_log" readonly>{{ chat_log }}</textarea>
     </div>
     <div>
-        <button type="submit" onclick="send()">Send</button>
-        <button type="button" onclick="quit()">Quit</button>
+        <button id="send-btn" type="submit" onclick="send()">Send</button>
+        <button id="quit-btn" type="button" onclick="quit()">Quit</button>
     </div>
     <script>
         function send() {
@@ -72,6 +73,19 @@ Not sure how to load this:
             // Close the chat dialog window
             window.close();
         }
+
+        function InitListeners() {
+	  // add a key listener to the main textarea
+	  var messageTextArea = document.getElementById('message');
+	  messageTextArea.addEventListener('keypress', function(event) {
+	      // if user presses "Enter" on keyboard
+	      if (event.key == 'Enter') {
+		  event.preventDefault();  // cancel default action if needed
+		  document.getElementById('send-btn').click();
+	      }
+	  });
+	}
+
     </script>
 </body>
 </html>
