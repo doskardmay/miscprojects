@@ -25,7 +25,7 @@ def index():
             botmsg = botresponse['messages'][0]['content']
             botmsg2 = botresponse.get('messages','')[1].get('content','')
         except:
-            botmsg = 'Sorry, I did not understand your query. Can you rephrase your question?'
+            botmsg = 'Sorry, I did not understand. Can you rephrase your question?'
             botmsg2 = ''
 
         botmsg = botmsg.replace('<>','\n')
@@ -34,9 +34,7 @@ def index():
         # Append the message to the chat dialog main text area
         # chat_log = f"User: {message}\n"
         chat_log = f"User: {message}\nResponse: {botmsg}\n{botmsg2}"
-        # replace the previous line with your logic to get the bot's response and append it to the chat log
-
-        # return render_template('hello world',chat_log=chat_log)
+        # render the chat log textarea only
         return render_template('chatdata.html', chat_log=chat_log)
 
 
