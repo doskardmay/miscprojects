@@ -27,7 +27,7 @@ Not sure how to load this:
       <img src="./static/LabCorpLogoNew.png" alt="Labcorp logo" width="22%" height="6%" />
       <br>
       
-      <label for="message">Enter your question or response here and press [Send]:</label>
+      <label for="message">Enter your question or response here and press [Enter]:</label>
       <br>
       <div>
         <textarea id="message" name="message" width="200px"></textarea>
@@ -65,6 +65,9 @@ Not sure how to load this:
                 var chat_log = document.getElementById('chat-log');
                 chat_log.value += data;
                 chat_log.scrollTop = chat_log.scrollHeight;
+
+		var message = document.getElementById('message');
+		message.value =   '';
             })
             .catch(error => console.error(error));
         }
@@ -82,6 +85,11 @@ Not sure how to load this:
 	      if (event.key == 'Enter') {
 		  event.preventDefault();  // cancel default action if needed
 		  document.getElementById('send-btn').click();
+
+		  // display 'working' message in Chat log
+                  // var chat_log = document.getElementById('chat-log');
+                  // chat_log.value += '\nGot it. Working...\n';
+                  // chat_log.scrollTop = chat_log.scrollHeight;
 	      }
 	  });
 	}
