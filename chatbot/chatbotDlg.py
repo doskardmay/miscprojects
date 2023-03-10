@@ -22,8 +22,12 @@ def index():
         isNewSession = False
         botresponse = response.json()
         try:
-            botmsg = botresponse['messages'][0]['content']
-            botmsg2 = botresponse.get('messages','')[1].get('content','')
+            botmsg = botresponse['messages'][0].get('content','')
+            if len(botresponse['messages']) > 1:
+                botmsg2 = botresponse.get('messages','')[1].get('content','')
+            else:
+                botmsg2 = ''
+                
         except:
             botmsg = 'Sorry, I did not understand. Can you rephrase your question?'
             botmsg2 = ''
@@ -32,8 +36,7 @@ def index():
         botmsg2 = botmsg2.replace('<>','\n')
         
         # Append the message to the chat dialog main text area
-        # chat_log = f"User: {message}\n"
-        chat_log = f"User: {message}\nResponse: {botmsg}\n{botmsg2}"
+        chat_log = f"\n\n[User]: {message}\n\n[Response]: {botmsg}\n{botmsg2}"
         # render the chat log textarea only
         return render_template('chatdata.html', chat_log=chat_log)
 
